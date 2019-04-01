@@ -40,25 +40,34 @@
     include_role: 
       name: tomcat
 
-- name: index.html on app 1
-  hosts: app1
+- name: install index.html on apps
   become: true
-
+  hosts: apps
   tasks:
-  - name: copy static index.html to tomcat webapps/ansible/index.html
+    name: send app html to tomcat
     template:
-      src: index.html.app1
+      src: index.html.app.j2
       dest: /usr/share/tomcat/webapps/ansible/index.html
 
-- name: index.html on app 1
-  hosts: app2
-  become: true
+# - name: index.html on app 1
+#   hosts: app1
+#   become: true
 
-  tasks:
-  - name: copy static index.html to tomcat webapps/ansible/index.html
-    template:
-      src: index.html.app2
-      dest: /usr/share/tomcat/webapps/ansible/index.html
+#   tasks:
+#   - name: copy static index.html to tomcat webapps/ansible/index.html
+#     template:
+#       src: index.html.app1
+#       dest: /usr/share/tomcat/webapps/ansible/index.html
+
+# - name: index.html on app 1
+#   hosts: app2
+#   become: true
+
+#   tasks:
+#   - name: copy static index.html to tomcat webapps/ansible/index.html
+#     template:
+#       src: index.html.app2
+#       dest: /usr/share/tomcat/webapps/ansible/index.html
 
 - name: deploy postgres
   hosts: apps
