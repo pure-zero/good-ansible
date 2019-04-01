@@ -24,17 +24,19 @@
       dest: /etc/yum.repos.d/open_three-tier-app.repo
       mode: 0644
 
-- name: install app
+- name: install haproxy
   become: true
-  
+  hosts: frontends
   tasks:
-  - name: deploy haproxy
-    hosts: frontends
+  - name: run haproxy role
     include_role: 
       name: haproxy
 
-  - name: deploy tomcat
-    hosts: apps
+- name: install tomcat
+  become: true
+  hosts: apps
+  tasks: 
+  - name: run tomcat role
     include_role: 
       name: tomcat
 
