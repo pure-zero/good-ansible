@@ -24,44 +24,19 @@
       dest: /etc/yum.repos.d/open_three-tier-app.repo
       mode: 0644
 
-- name: install haproxy
-  hosts: frontends
+- name: install app
   become: true
   
   tasks:
   - name: deploy haproxy
+    hosts: frontends
     include_role: 
       name: haproxy
 
-- name: deploy tomcat
-  hosts: apps
-  become: true
-
-  tasks:
-  - name: install tomcat
-    package:
+  - name: deploy tomcat
+    hosts: apps
+    include_role: 
       name: tomcat
-      state: latest
-  - name: enable tomcat at boot
-    service:
-      name: tomcat
-      enabled: yes
-
-  - name: create ansible tomcat directory
-    file:
-      path: /usr/share/tomcat/webapps/ROOT
-      state: directory
-
-  - name: copy static index.html to tomcat webapps/ansible/index.html
-    template:
-      src: index.html.j2
-      dest: /usr/share/tomcat/webapps/ROOT/index.html
-      mode: 0644
-
-  - name: start tomcat
-    service:
-      name: tomcat
-      state: started
 
 - name: index.html on app 1
   hosts: app1
@@ -98,11 +73,11 @@
       enabled: yes
 
  # only run the next 2 tasks once!
-  - name: initilize postgres
-    command: postgresql-setup initdb
+  # - name: initilize postgres
+  #   command: postgresql-setup initdb
 
-  - name: initilize postgres some more
-    command: chkconfig postgresql on
+  # - name: initilize postgres some more
+  #   command: chkconfig postgresql on
 
   - name: start postgres
     service:
