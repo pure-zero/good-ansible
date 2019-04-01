@@ -43,7 +43,7 @@
   hosts: apps
   become: true
   tasks:
-    name: send app html to tomcat
+  - name: send app html to tomcat
     template:
       src: index.html.app.j2
       dest: /usr/share/tomcat/webapps/ansible/index.html
