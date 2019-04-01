@@ -43,6 +43,10 @@
   hosts: apps
   become: true
   tasks:
+  - name: make directory
+    file:
+      path: /usr/share/tomcat/webapps/ansible
+      state: directory
   - name: send app html to tomcat
     template:
       src: index.html.app.j2
