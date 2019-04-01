@@ -39,7 +39,7 @@
     include_role: 
       name: tomcat
 
-- name: install index.html on apps
+- name: install index on tomcat
   hosts: apps
   become: true
   tasks:
