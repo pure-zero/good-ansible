@@ -22,3 +22,13 @@
   service:
     name: tomcat
     state: started
+
+- name: make directory
+  file:
+    path: /usr/share/tomcat/webapps/ansible
+    state: directory
+
+- name: send app html to tomcat
+  template:
+    src: ../templates/index.html.app.j2
+    dest: /usr/share/tomcat/webapps/ansible/index.html
