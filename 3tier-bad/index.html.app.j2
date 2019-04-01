@@ -11,6 +11,6 @@
 </head>
 
 <body>
-    <h1>Ansible has done its job - Welcome to Tomcat on App{{{groups['apps'].index(inventory_hostname)}}}</h1>
+    <h1>Ansible has done its job - Welcome to Tomcat on App{{ groups['apps'].index(inventory_hostname) }}</h1>
 </body>
 </html>
