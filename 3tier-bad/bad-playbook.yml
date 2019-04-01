@@ -16,7 +16,6 @@
 - name: configuration
   hosts: all
   become: true
-
   tasks:
   - name: enable repos
     template:
@@ -25,24 +24,24 @@
       mode: 0644
 
 - name: install haproxy
-  become: true
   hosts: frontends
+  become: true
   tasks:
   - name: run haproxy role
     include_role: 
       name: haproxy
 
 - name: install tomcat
-  become: true
   hosts: apps
+  become: true
   tasks: 
   - name: run tomcat role
     include_role: 
       name: tomcat
 
 - name: install index.html on apps
-  become: true
   hosts: apps
+  become: true
   tasks:
     name: send app html to tomcat
     template:
