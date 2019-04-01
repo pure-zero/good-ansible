@@ -1,4 +1,4 @@
-- name: enable tomcat at boot
+- name: enable tomcat
   service: name=tomcat enabled=yes
 
 - name: start tomcat
