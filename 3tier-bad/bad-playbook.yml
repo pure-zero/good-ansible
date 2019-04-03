@@ -30,6 +30,8 @@
   - name: run haproxy role
     include_role: 
       name: haproxy
+    tags:
+      - haproxy
 
 - name: install tomcat
   hosts: apps
@@ -38,6 +40,8 @@
   - name: run tomcat role
     include_role: 
       name: tomcat
+    tags:
+      - tomcat
 
 - name: deploy postgres
   become: true
@@ -46,6 +50,8 @@
   - name: install postgres
     include_role:
       name: postgres
+    tags:
+      - postgres
 
 - name: deploy apache
   become: true
@@ -54,7 +60,8 @@
   - name: deploy apache
     include_role:
       name: apache
-
+    tags:
+      - apache
 # - name: confirm started
 #   hosts: localhost
 #   get_url:

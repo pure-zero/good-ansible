@@ -8,13 +8,13 @@
 
 - name: stat data folder
   stat:
-    path: /var/lib/pgsql/data
+    path: /var/lib/pgsql/data/PG_VERSION
   register: dataDir
 
 - name: initilize postgres
   command: postgresql-setup initdb
-  when: dataDir.stat.exists is not defined
+  when: dataDir.stat.exists == False
 
 - name: initilize postgres some more
   command: chkconfig postgresql on
-  when: dataDir.stat.exists is not defined
+  when: dataDir.stat.exists == False
