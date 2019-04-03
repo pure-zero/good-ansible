@@ -13,8 +13,8 @@
 
 - name: initilize postgres
   command: postgresql-setup initdb
-  when: dataDir.stat.islnk is not defined
+  when: dataDir.stat.exists is not defined
 
 - name: initilize postgres some more
   command: chkconfig postgresql on
-  when: dataDir.stat.islnk is not defined
+  when: dataDir.stat.exists is not defined

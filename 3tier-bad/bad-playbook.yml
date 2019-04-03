@@ -40,7 +40,6 @@
       name: tomcat
 
 - name: deploy postgres
-  hosts: apps
   become: true
   hosts: appdbs
   tasks:
@@ -49,10 +48,15 @@
       name: postgres
 
 - name: deploy apache
-  hosts: apps
   become: true
   hosts: apps
   tasks:
   - name: deploy apache
     include_role:
       name: apache
+
+# - name: confirm started
+#   hosts: localhost
+#   get_url:
+#     uri: http://{{}}
+  
